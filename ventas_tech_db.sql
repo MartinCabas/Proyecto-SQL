@@ -1,9 +1,16 @@
+--CREATE DATABASE
+IF DB_ID ('Ventas_Tech_DB') IS NULL
 CREATE DATABASE Ventas_Tech_DB
 GO
 USE Ventas_Tech_DB
 GO
-DROP TABLE IF EXISTS ventas;DROP TABLE IF EXISTS productos;DROP TABLE IF EXISTS clientes;DROP TABLE IF EXISTS categorias;
+--DROP
+DROP TABLE IF EXISTS ventas;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS clientes;
+DROP TABLE IF EXISTS categorias;
 GO
+--CREATE
 CREATE TABLE CATEGORIAS(
 Id_categoria INT PRIMARY KEY,
 Nombre_categoria VARCHAR (50) not null,
@@ -23,9 +30,9 @@ Nombre_producto VARCHAR(100) NOT NULL,
 Id_categoria INT NOT NULL,
 Precio DECIMAL (10,2) NOT NULL check (Precio > 0),
 Stock INT DEFAULT 0,
-Activo BIT DEFAULT 1
+Activo BIT DEFAULT 1,
 
-CONSTRAINT FK_Productos_Categorias FOREIGN KEY (Id_categoria) REFERENCES CATEGORIAS (Id_categoria),
+CONSTRAINT FK_Productos_Categorias FOREIGN KEY (Id_categoria) REFERENCES CATEGORIAS (Id_categoria)
 )
 
 CREATE TABLE VENTAS(
@@ -40,7 +47,7 @@ Fecha_Venta DATE DEFAULT GETDATE ()
 CONSTRAINT FK_Ventas_Clientes FOREIGN KEY (Id_Cliente) REFERENCES CLIENTES (Id_Cliente),
 CONSTRAINT FK_Ventas_Productos FOREIGN KEY (Id_Producto) REFERENCES PRODUCTOS (Id_producto)
 )
-
+--INSERT
 INSERT INTO categorias (id_categoria, nombre_categoria, descripcion) VALUES  (1,'Computación','Laptops, PCs y monitores'),  (2,'Accesorios','Periféricos y complementos'),  (3, 'Audio','Auriculares y parlantes'),  (4,'Almacenamiento','Discos y memorias');
 INSERT INTO clientes (id_cliente, nombre, email, ciudad, fecha_registro) VALUES
   (1, 'María López',  'maria@mail.com',  'Buenos Aires', '2024-01-05'),
@@ -61,8 +68,8 @@ INSERT INTO clientes (id_cliente, nombre, email, ciudad, fecha_registro) VALUES
   ( 8, 3, 2, 8,   28.00, '2024-03-13'),
   ( 9, 4, 4, 1,  120.00, '2024-03-14'),
   (10, 5, 3, 2,  450.00, '2024-03-15');
-
-  SELECT * FROM categorias
+  --VALIDACION
+  SELECT * FROM categorias;
   SELECT * FROM clientes;
-  SELECT * FROM productos
-  SELECT * FROM ventas
+  SELECT * FROM productos;
+  SELECT * FROM ventas;
